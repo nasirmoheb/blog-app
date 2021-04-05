@@ -1,15 +1,21 @@
 var express = require('express');
+var dotenv = require('dotenv').config({ path: './config.env' });
 var path = require('path');
 var db = require('./mongoosedb.js');
 var Post = require('./models/post.js');
+const commentRouter = require('./routes/commetRoute');
+const postRouter = require('./routes/postRoute');
 
 var app = express();
 
 /* A template engine enables you to use static template files in your application. At runtime, the template engine replaces variables in a template file with actual values, and transforms the template into an HTML file sent to the client. */
-
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/public', express.static(path.join(__dirname, '/public')));
+
+//*****Use The Routers
+app.use('/api/post', postRouter);
+app.use('/api/comment', commentRouter);
 
 app.get('/about', function (req, res) {
   res.render('about');

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  'mongodb+srv://test:test123@cluster0.8mhvx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  process.env.DB,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
